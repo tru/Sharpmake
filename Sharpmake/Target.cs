@@ -142,6 +142,7 @@ namespace Sharpmake
     {
         MSBuild = 0x01,
         FastBuild = 0x02,
+        Ninja = 0x03,
     }
 
     [Fragment, Flags]

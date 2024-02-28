@@ -894,12 +894,12 @@ namespace Sharpmake
             public OrderableStrings AdditionalCompilerOptions = new OrderableStrings();
 
             /// <summary>
-            /// Get a list of compiler optimization options to send when calling the compiler. It is necessary to properly implement the 
+            /// Get a list of compiler optimization options to send when calling the compiler. It is necessary to properly implement the
             /// fastbuild .CompilerOptionsDeoptimized
             /// </summary>
             /// <remarks>
             /// <para>
-            /// This property is for the compiler. It is similar to 
+            /// This property is for the compiler. It is similar to
             /// <see cref="AdditionalCompilerOptions"/> but only for optimizations options not exposed by Sharpmake.
             /// </para>
             /// </remarks>
@@ -1603,7 +1603,7 @@ namespace Sharpmake
             /// </summary>
             /// <remarks>
             /// With this field we can force some extra fastbuild unity sections even for sections with identical settings.
-            /// Sharpmake will take into account the bucket number when creating its internal unity objects and this will let us create artifical delimitation 
+            /// Sharpmake will take into account the bucket number when creating its internal unity objects and this will let us create artifical delimitation
             /// of setting sections.
             /// This field should be used only if FragmentHashUnityResolver is used.
             /// </remarks>
@@ -1624,7 +1624,7 @@ namespace Sharpmake
             /// We now do this in a Configure method:
             /// conf.FastBuildUnitySectionBucket = (byte)(target.Optimization > Optimization.Debug ? 1 : 0);
             /// By doing this we force two separate unity sections on build machines(same as on developer machine).
-            /// 
+            ///
             /// Important: This assumes that you configured Sharpmake to use FragmentHashUnityResolver as the unity resolver.
             /// </example>
             public Byte FastBuildUnitySectionBucket = 0;
@@ -1637,6 +1637,8 @@ namespace Sharpmake
             ///  .bff files but, instead, include any existing .bff files from the appropriate targets.
             /// </remarks>
             public bool DoNotGenerateFastBuild = false;
+
+            public bool DoNotGenerateNinja = false;
 
             // Jumbo builds support for msbuild
             public int MaxFilesPerJumboFile = 0;
@@ -2410,6 +2412,12 @@ namespace Sharpmake
             /// Gets or sets whether FASTBuild will be used to build the project.
             /// </summary>
             public bool IsFastBuild = false;
+
+            // FastBuild configuration
+            /// <summary>
+            /// Gets or sets whether Ninja will be used to build the project.
+            /// </summary>
+            public bool IsNinja = false;
 
             /// <summary>
             /// List of the MasterBff files this project appears in.

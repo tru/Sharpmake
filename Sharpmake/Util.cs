@@ -108,7 +108,7 @@ namespace Sharpmake
         }
 
         /// <summary>
-        /// Finds the first occurrence of directive and returns the 
+        /// Finds the first occurrence of directive and returns the
         /// requested param value. Ex:
         /// GetTextTemplateDirectiveParam(ttPath, "output", "extension")
         /// will match:
@@ -1017,7 +1017,7 @@ namespace Sharpmake
                 _parents.Add(sequence);
 
                 // IDictionary returns different enumerators depending on which interface GetEnumerator called from.
-                // IDictionary.GetEnumerator enumerates DictionaryEntry 
+                // IDictionary.GetEnumerator enumerates DictionaryEntry
                 // IEnumerable.GetEnumerator enumerates KeyValuePair<>
                 bool first = true;
                 IEnumerator enumerator = (sequence as IDictionary)?.GetEnumerator() ?? sequence.GetEnumerator();
@@ -1218,12 +1218,12 @@ namespace Sharpmake
 
             /// <summary>
             /// This can be used to check and limit by specific installed workloads.
-            /// 
+            ///
             /// What is a Workload?
             /// In the VS installer, a 'Workload' is a section that you see in the UI such as 'Desktop development with C++' or '.NET desktop development'.
-            /// 
+            ///
             /// The full list of products is here: https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids
-            /// 
+            ///
             /// For each product, clicking it will bring up a page of all of the possible Workloads.
             /// For example: https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional
             /// </summary>
@@ -1232,13 +1232,13 @@ namespace Sharpmake
             /// <summary>
             /// This can be used to check and limit by specific installed components.
             /// What is a Component?
-            /// In the Visual Studio Installer, the 'Components' are individual components associated with each Workload (and some just on the side), 
+            /// In the Visual Studio Installer, the 'Components' are individual components associated with each Workload (and some just on the side),
             /// that you can see in the Summary on the right.
             /// Each workflow contains a number of mandatory components, but also a list of optional ones.
             /// An example would be: 'NuGet package manager' or 'C++/CLI support'.
-            /// 
+            ///
             /// The full list of products is here: https://docs.microsoft.com/en-us/visualstudio/install/workload-and-component-ids
-            /// 
+            ///
             /// For each product, clicking it will bring up a page of all of the possible Workloads.
             /// For example: https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-professional
             /// </summary>
@@ -1471,6 +1471,9 @@ namespace Sharpmake
 
                     case DevEnv.make:
                         return ".make";
+
+                    case DevEnv.ninja:
+                        return ".ninja";
 
                     default:
                         throw new NotImplementedException("GetProjectFileExtension called with unknown DevEnv: " + devEnv);

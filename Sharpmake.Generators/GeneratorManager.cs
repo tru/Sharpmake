@@ -6,6 +6,7 @@ using Sharpmake.Generators.Apple;
 using Sharpmake.Generators.FastBuild;
 using Sharpmake.Generators.Generic;
 using Sharpmake.Generators.VisualStudio;
+using Sharpmake.Generators.Ninja;
 
 namespace Sharpmake.Generators
 {
@@ -46,6 +47,10 @@ namespace Sharpmake.Generators
 
         private Makefile _makefileGenerator = null;
         public Makefile MakefileGenerator => _makefileGenerator ?? (_makefileGenerator = new Makefile());
+
+        private NinjaGenerator _ninjaGenerator = null;
+        public NinjaGenerator NinjaGenerator => _ninjaGenerator ?? (_ninjaGenerator = new NinjaGenerator());
+
         #endregion
 
         // singleton
@@ -81,6 +86,11 @@ namespace Sharpmake.Generators
                 DevEnv devEnv = configurations[0].Target.GetFragment<DevEnv>();
                 switch (devEnv)
                 {
+                    case DevEnv.ninja:
+                        {
+                            NinjaGenerator.Generate(builder, project, configurations, projectFile, generatedFiles, skipFiles);
+                            break;
+                        }
                     case DevEnv.make:
                         {
                             if (configurations[0].Platform == Platform.android)
@@ -137,6 +147,11 @@ namespace Sharpmake.Generators
                 DevEnv devEnv = configurations[0].Target.GetFragment<DevEnv>();
                 switch (devEnv)
                 {
+                    case DevEnv.ninja:
+                    {
+                        NinjaGenerator.Generate(builder, solution, configurations, solutionFile, generatedFiles, skipFiles);
+                        break;
+                    }
                     case DevEnv.make:
                         {
                             if (configurations[0].Platform == Platform.android)
