@@ -77,6 +77,10 @@ namespace Sharpmake
             /// </summary>
             public string MasterBffFilePath => Path.Combine(MasterBffDirectory, MasterBffFileName);
 
+            public string MasterNinjaDirectory = "[conf.SolutionPath]";
+            public string MasterNinjaFileName = "[conf.SolutionFileName]";
+            public string MasterNinjaFilePath => Path.Combine(MasterNinjaDirectory, MasterNinjaFileName);
+
             // Can be set to customize solution platform name
             private string _platformName = null;
             public string PlatformName
@@ -182,7 +186,7 @@ namespace Sharpmake
                 public Build ToBuild { get; internal set; } = Build.Unknown;
             }
 
-            //Holds the reference to the startup project. When the project will be resolved, 
+            //Holds the reference to the startup project. When the project will be resolved,
             //his full name path will be resolved too which allows us to point to the right project.
             public IncludedProjectInfo StartupProject { get; set; }
 

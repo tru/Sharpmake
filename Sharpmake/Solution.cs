@@ -59,6 +59,15 @@ namespace Sharpmake
         public bool GenerateFastBuildAllOnlyForConfThatNeedIt = true;
 
         /// <summary>
+        /// Ninja specific options
+        /// </summary>
+        public bool GenerateNinjaAllProject = true;
+        public string NinjaAllProjectName = "[solution.Name]_ALL";
+        public string NinjaAllProjectFileSuffix = "_All";
+        public string NinjaAllSolutionFolder = "Ninja";
+        public string NinjaMasterSolutionFolder = "Ninja";
+
+        /// <summary>
         /// For adding additional files/folders to the solution
         /// Keys are names of the directories in the virtual solution hierarchy, values are paths
         /// </summary>

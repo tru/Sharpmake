@@ -27,6 +27,14 @@ namespace HelloLinux
             // note: because we write in makefiles we double the $ to escape it
             conf.AdditionalLinkerOptions.Add("-Wl,-rpath='$$ORIGIN'");
 
+            conf.LibraryFiles.Add("libuuid.so");
+
+            conf.AddPrivateDependency<Dll1Project>(target);
+            conf.AddPrivateDependency<StaticLib2Project>(target);
+            conf.AddPrivateDependency<HeaderOnlyLibProject>(target);
+            conf.AddPrivateDependency<ExternalLibProject>(target);
+            conf.AddPrivateDependency<LibGroupProject>(target);
+
             conf.Defines.Add("CREATION_DATE=\"October 2020\"");
         }
     }

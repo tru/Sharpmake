@@ -1472,9 +1472,6 @@ namespace Sharpmake
                     case DevEnv.make:
                         return ".make";
 
-                    case DevEnv.ninja:
-                        return ".ninja";
-
                     default:
                         throw new NotImplementedException("GetProjectFileExtension called with unknown DevEnv: " + devEnv);
                 }

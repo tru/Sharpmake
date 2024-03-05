@@ -179,7 +179,7 @@ namespace Sharpmake.Generators.VisualStudio
                 case Project.Configuration.OutputType.DotNetConsoleApp:
                 case Project.Configuration.OutputType.DotNetWindowsApp:
                     {
-                        context.Options["ConfigurationType"] = context.Configuration.IsFastBuild ? "Makefile" : "Application";
+                        context.Options["ConfigurationType"] = (context.Configuration.IsFastBuild || context.Configuration.IsNinja) ? "Makefile" : "Application";
                     }
                     break;
                 case Project.Configuration.OutputType.Dll:
@@ -189,18 +189,18 @@ namespace Sharpmake.Generators.VisualStudio
                         {
                             throw new Error($"Current platform {context.Configuration.Platform} doesn't support shared lib output type: Project {context.Project.GetType()} conf {context.Configuration.Target}");
                         }
-                        context.Options["ConfigurationType"] = context.Configuration.IsFastBuild ? "Makefile" : "DynamicLibrary";
+                        context.Options["ConfigurationType"] = (context.Configuration.IsFastBuild || context.Configuration.IsNinja) ? "Makefile" : "DynamicLibrary";
                         context.CommandLineOptions["ConfigurationType"] = @"/D""_WINDLL""";
                     }
                     break;
                 case Project.Configuration.OutputType.Lib:
-                    context.Options["ConfigurationType"] = context.Configuration.IsFastBuild ? "Makefile" : "StaticLibrary";
+                    context.Options["ConfigurationType"] = (context.Configuration.IsFastBuild || context.Configuration.IsNinja) ? "Makefile" : "StaticLibrary";
                     break;
                 case Project.Configuration.OutputType.Utility:
                     context.Options["ConfigurationType"] = "Utility";
                     break;
                 case Project.Configuration.OutputType.None:
-                    context.Options["ConfigurationType"] = context.Configuration.IsFastBuild || context.Configuration.CustomBuildSettings != null ? "Makefile" : FileGeneratorUtilities.RemoveLineTag;
+                    context.Options["ConfigurationType"] = context.Configuration.IsFastBuild || context.Configuration.IsNinja || context.Configuration.CustomBuildSettings != null ? "Makefile" : FileGeneratorUtilities.RemoveLineTag;
                     break;
             }
         }
@@ -1060,12 +1060,12 @@ namespace Sharpmake.Generators.VisualStudio
 
             context.SelectOption
             (
-            Options.Option(Options.Vc.Compiler.JumboBuild.Disable, () => 
+            Options.Option(Options.Vc.Compiler.JumboBuild.Disable, () =>
             {
                 context.Options["JumboBuild"] = FileGeneratorUtilities.RemoveLineTag;
-                context.Options["MaxFilesPerJumboFile"] = FileGeneratorUtilities.RemoveLineTag; 
-                context.Options["MinFilesPerJumboFile"] = FileGeneratorUtilities.RemoveLineTag; 
-                context.Options["MinJumboFiles"] = FileGeneratorUtilities.RemoveLineTag; 
+                context.Options["MaxFilesPerJumboFile"] = FileGeneratorUtilities.RemoveLineTag;
+                context.Options["MinFilesPerJumboFile"] = FileGeneratorUtilities.RemoveLineTag;
+                context.Options["MinJumboFiles"] = FileGeneratorUtilities.RemoveLineTag;
             }),
             Options.Option(Options.Vc.Compiler.JumboBuild.Enable, () =>
             {
@@ -1138,7 +1138,7 @@ namespace Sharpmake.Generators.VisualStudio
             // Default defines...
             optionsContext.PlatformVcxproj.SelectCompilerOptions(context);
 
-            if (useClangCl && context.Configuration.IsFastBuild)
+            if (useClangCl && (context.Configuration.IsFastBuild || context.Configuration.IsNinja))
             {
                 // This prevents clang-cl from auto-detecting the locally installed MSVC toolchain. Only paths on the command line will be considered.
                 // It doesn't apply on MSVC build, where the toolchain is provided through environment variables.
@@ -1444,6 +1444,9 @@ namespace Sharpmake.Generators.VisualStudio
             {
                 if (context.Configuration.IsFastBuild)
                     throw new NotImplementedException("Sharpmake does not support code analysis in fastbuild targets yet!");
+
+                if (context.Configuration.IsNinja)
+                    throw new NotImplementedException("Sharpmake does not support code analysis in ninja targets yet!");
 
                 //RunCodeAnalysis
                 //    Enable                                  RunCodeAnalysis="true"

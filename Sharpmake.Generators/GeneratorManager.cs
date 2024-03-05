@@ -86,11 +86,6 @@ namespace Sharpmake.Generators
                 DevEnv devEnv = configurations[0].Target.GetFragment<DevEnv>();
                 switch (devEnv)
                 {
-                    case DevEnv.ninja:
-                        {
-                            NinjaGenerator.Generate(builder, project, configurations, projectFile, generatedFiles, skipFiles);
-                            break;
-                        }
                     case DevEnv.make:
                         {
                             if (configurations[0].Platform == Platform.android)
@@ -106,6 +101,7 @@ namespace Sharpmake.Generators
                         {
                             VcxprojGenerator.Generate(builder, project, configurations, projectFile, generatedFiles, skipFiles);
                             BffGenerator.Generate(builder, project, configurations, projectFile, generatedFiles, skipFiles);
+                            NinjaGenerator.Generate(builder, project, configurations, projectFile, generatedFiles, skipFiles);
                             break;
                         }
                     case DevEnv.xcode:
@@ -147,11 +143,6 @@ namespace Sharpmake.Generators
                 DevEnv devEnv = configurations[0].Target.GetFragment<DevEnv>();
                 switch (devEnv)
                 {
-                    case DevEnv.ninja:
-                    {
-                        NinjaGenerator.Generate(builder, solution, configurations, solutionFile, generatedFiles, skipFiles);
-                        break;
-                    }
                     case DevEnv.make:
                         {
                             if (configurations[0].Platform == Platform.android)

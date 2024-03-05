@@ -18,8 +18,9 @@ namespace HelloWorld
 
             AddTargets(new Target(
                     Platform.win32 | Platform.win64,
-                    DevEnv.vs2019,
-                    Optimization.Debug | Optimization.Release
+                    DevEnv.vs2022,
+                    Optimization.Debug | Optimization.Release,
+                    buildSystem: BuildSystem.MSBuild | BuildSystem.Ninja
             ));
 
             SourceRootPath = @"[project.SharpmakeCsPath]\codebase";
@@ -50,8 +51,9 @@ namespace HelloWorld
 
             AddTargets(new Target(
                     Platform.win32 | Platform.win64,
-                    DevEnv.vs2019,
-                    Optimization.Debug | Optimization.Release
+                    DevEnv.vs2022,
+                    Optimization.Debug | Optimization.Release,
+                    buildSystem: BuildSystem.MSBuild | BuildSystem.Ninja
             ));
         }
 
@@ -69,7 +71,7 @@ namespace HelloWorld
         [Sharpmake.Main]
         public static void SharpmakeMain(Sharpmake.Arguments arguments)
         {
-            KitsRootPaths.SetUseKitsRootForDevEnv(DevEnv.vs2019, KitsRootEnum.KitsRoot10, Options.Vc.General.WindowsTargetPlatformVersion.v10_0_19041_0);
+            KitsRootPaths.SetUseKitsRootForDevEnv(DevEnv.vs2022, KitsRootEnum.KitsRoot10, Options.Vc.General.WindowsTargetPlatformVersion.v10_0_19041_0);
             arguments.Generate<HelloWorldSolution>();
         }
     }

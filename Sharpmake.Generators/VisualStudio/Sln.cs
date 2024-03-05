@@ -308,6 +308,14 @@ namespace Sharpmake.Generators.VisualStudio
                     throw new Error("FastBuildMasterBffSolutionFolder needs to be set in solution " + solutionFile);
             }
 
+            SolutionFolder masterNinjaFolder = null;
+            if (true)
+            {
+                masterNinjaFolder = GetSolutionFolder(solution.NinjaMasterSolutionFolder);
+                if (masterNinjaFolder == null)
+                    throw new Error("NinjaMasterSolutionFolder needs to be set in solution " + solutionFile);
+            }
+
             // Write all needed folders before the projects to make sure the proper startup project is selected.
 
             // Ensure folders are always in the same order to avoid random shuffles
@@ -350,6 +358,28 @@ namespace Sharpmake.Generators.VisualStudio
                         }
                         fileGenerator.Write(Template.Solution.ProjectSectionEnd);
                     }
+                    else if (masterNinjaFolder == folder)
+                    {
+                        var ninjaFilesPath = new SortedSet<string>(new FileSystemStringComparer());
+
+                        foreach (var conf in solutionConfigurations)
+                        {
+                            string masterNinjaFilePath = conf.MasterNinjaFilePath + NinjaSettings.NinjaConfigFileExtension;
+                            ninjaFilesPath.Add(Util.PathGetRelative(solutionPath, masterNinjaFilePath));
+                            //ninjaFilesPath.Add(Util.PathGetRelative(solutionPath, Ninja.))
+                        }
+
+                        ninjaFilesPath.Add(solutionFile + NinjaSettings.NinjaConfigFileExtension);
+                        fileGenerator.Write(Template.Solution.SolutionItemBegin);
+                        {
+                            foreach (var path in ninjaFilesPath)
+                            {
+                                using (fileGenerator.Declare("soultionItemPath", path))
+                                    fileGenerator.WriteLine(Template.Solution.SolutionItem);
+                            }
+                        }
+                        fileGenerator.Write(Template.Solution.ProjectSectionEnd);
+                    }
                     fileGenerator.Write(Template.Solution.ProjectEnd);
                 }
             }
@@ -379,7 +409,7 @@ namespace Sharpmake.Generators.VisualStudio
                         fileGenerator.Write(Template.Solution.ProjectBegin);
                         Strings buildDepsGuids = new Strings(resolvedProject.Configurations.SelectMany(
                             c => c.GenericBuildDependencies
-                                .Where(dep => !dep.IsFastBuild)
+                                .Where(dep => !dep.IsFastBuild && !dep.IsNinja)
                                 .Select(p => p.ProjectGuid ?? ReadGuidFromProjectFile(p.ProjectFullFileNameWithExtension)
                             )
                         ));
@@ -472,7 +502,7 @@ namespace Sharpmake.Generators.VisualStudio
                     configurationSectionNames.Add(fileGenerator.Resolver.Resolve(Template.Solution.GlobalSectionSolutionConfiguration));
                 }
 
-                // set the compile command line 
+                // set the compile command line
                 if (File.Exists(visualStudioExe))
                 {
                     solutionConfiguration.CompileCommandLine = string.Format(@"""{0}"" ""{1}"" /build ""{2}|{3}""",
@@ -493,6 +523,7 @@ namespace Sharpmake.Generators.VisualStudio
             fileGenerator.Write(Template.Solution.GlobalSectionProjectConfigurationBegin);
 
             var solutionConfigurationFastBuildBuilt = new Dictionary<Solution.Configuration, List<string>>();
+            var solutionConfigurationNinjaBuilt = new Dictionary<Solution.Configuration, List<string>>();
             foreach (Solution.ResolvedProject solutionProject in solutionProjects)
             {
                 if (containsMultiDotNetFramework)
@@ -551,6 +582,8 @@ namespace Sharpmake.Generators.VisualStudio
 
                     if (includedProject != null && includedProject.Configuration.IsFastBuild)
                         solutionConfigurationFastBuildBuilt.GetValueOrAdd(solutionConfiguration, new List<string>());
+                    if (includedProject != null && includedProject.Configuration.IsNinja)
+                        solutionConfigurationNinjaBuilt.GetValueOrAdd(solutionConfiguration, new List<string>());
 
                     Platform projectPlatform = projectTarget.GetPlatform();
 
@@ -592,12 +625,17 @@ namespace Sharpmake.Generators.VisualStudio
                             build = includedProject.ToBuild == Solution.Configuration.IncludedProjectInfo.Build.Yes;
 
                             // for fastbuild, only build the projects that cannot be built through dependency chain
-                            if (!projectConf.IsFastBuild)
+                            if (!projectConf.IsFastBuild && !projectConf.IsNinja)
                                 build |= includedProject.ToBuild == Solution.Configuration.IncludedProjectInfo.Build.YesThroughDependency;
                             else
                             {
                                 if (build)
-                                    solutionConfigurationFastBuildBuilt[solutionConfiguration].Add(projectConf.Project.Name + " " + projectConf.Name);
+                                {
+                                    if (projectConf.IsFastBuild)
+                                        solutionConfigurationFastBuildBuilt[solutionConfiguration].Add(projectConf.Project.Name + " " + projectConf.Name);
+                                    if (projectConf.IsNinja)
+                                        solutionConfigurationNinjaBuilt[solutionConfiguration].Add(projectConf.Project.Name + " " + projectConf.Name);
+                                }
                             }
                         }
 
@@ -621,6 +659,15 @@ namespace Sharpmake.Generators.VisualStudio
                     Builder.Instance.LogErrorLine($"{solutionFile} - {solutionConfiguration.Name}|{solutionConfiguration.PlatformName} - has no FastBuild projects to build.");
                 else if (solution.GenerateFastBuildAllProject && fb.Value.Count > 1)
                     Builder.Instance.LogErrorLine($"{solutionFile} - {solutionConfiguration.Name}|{solutionConfiguration.PlatformName} - has more than one FastBuild project to build ({string.Join(";", fb.Value)}).");
+            }
+
+            foreach (var nb in solutionConfigurationNinjaBuilt)
+            {
+                var solutionConfiguration = nb.Key;
+                if (nb.Value.Count == 0)
+                    Builder.Instance.LogErrorLine($"{solutionFile} - {solutionConfiguration.Name}|{solutionConfiguration.PlatformName} - has no Ninja projects to build.");
+                else if (solution.GenerateFastBuildAllProject && nb.Value.Count > 1)
+                    Builder.Instance.LogErrorLine($"{solutionFile} - {solutionConfiguration.Name}|{solutionConfiguration.PlatformName} - has more than one Ninja project to build ({string.Join(";", nb.Value)}).");
             }
 
             fileGenerator.Write(Template.Solution.GlobalSectionProjectConfigurationEnd);

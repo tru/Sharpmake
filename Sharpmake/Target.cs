@@ -142,7 +142,7 @@ namespace Sharpmake
     {
         MSBuild = 0x01,
         FastBuild = 0x02,
-        Ninja = 0x03,
+        Ninja = 0x04,
     }
 
     [Fragment, Flags]
@@ -279,8 +279,7 @@ namespace Sharpmake
             OutputType outputType = OutputType.Lib,
             Blob blob = Blob.NoBlob,
             BuildSystem buildSystem = BuildSystem.MSBuild,
-            DotNetFramework framework = DotNetFramework.v3_5
-        )
+            DotNetFramework framework = DotNetFramework.v3_5)
         {
             Platform = platform;
             DevEnv = devEnv;

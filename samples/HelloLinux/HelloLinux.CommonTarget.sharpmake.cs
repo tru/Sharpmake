@@ -135,9 +135,7 @@ namespace HelloLinux
                 BuildSystem.FastBuild
             );
 
-            var ninjaBuildTarget = new CommonTarget(Platform.linux, DevEnv.ninja, Optimization.Debug | Optimization.Release, Blob.NoBlob, BuildSystem.Default);
-
-            return new[] { ninjaBuildTarget };
+            return new[] { defaultTarget };
         }
     }
 }

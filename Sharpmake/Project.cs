@@ -403,6 +403,11 @@ namespace Sharpmake
             get { return this is FastBuildAllProject; }
         }
 
+        public bool IsNinjaBuildAll
+        {
+            get { return this is NinjaBuildAllProject; }
+        }
+
         private IEnumerable<Strings> GetStringFields()
         {
             yield return AdditionalSourceRootPaths;
@@ -907,7 +912,7 @@ namespace Sharpmake
                     AddMatchExtensionFiles(additionalFiles, ProtoFiles, ProtoExtensions);
                 }
 
-                // Apply Filters 
+                // Apply Filters
                 if (SourceFilesFiltersRegex.Count != 0)
                 {
                     Strings allSourceFile = SourceFiles;
@@ -1090,27 +1095,27 @@ namespace Sharpmake
                     var configSourceFilesBuildExcludeRegex = RegexCache.GetCachedRegexes(conf.SourceFilesBuildExcludeRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesBuildExclude, configSourceFilesBuildExcludeRegex);
 
-                    // Resolve files that will be built as C Files 
+                    // Resolve files that will be built as C Files
                     conf.ResolvedSourceFilesWithCompileAsCOption.AddRange(resolvedSourceFilesWithCompileAsCOption);
                     var configSourceFilesCompileAsCRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsCRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsCOption, configSourceFilesCompileAsCRegex);
 
-                    // Resolve files that will be built as CPP Files 
+                    // Resolve files that will be built as CPP Files
                     conf.ResolvedSourceFilesWithCompileAsCPPOption.AddRange(resolvedSourceFilesWithCompileAsCPPOption);
                     var configSourceFilesCompileAsCPPRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsCPPRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsCPPOption, configSourceFilesCompileAsCPPRegex);
 
-                    // Resolve files that will be built as ObjC Files 
+                    // Resolve files that will be built as ObjC Files
                     conf.ResolvedSourceFilesWithCompileAsObjCOption.AddRange(resolvedSourceFilesWithCompileAsObjCOption);
                     var configSourceFilesCompileAsObjCRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsObjCRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsObjCOption, configSourceFilesCompileAsObjCRegex);
 
-                    // Resolve files that will be built as ObjCPP Files 
+                    // Resolve files that will be built as ObjCPP Files
                     conf.ResolvedSourceFilesWithCompileAsObjCPPOption.AddRange(resolvedSourceFilesWithCompileAsObjCPPOption);
                     var configSourceFilesCompileAsObjCPPRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsObjCPPRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsObjCPPOption, configSourceFilesCompileAsObjCPPRegex);
 
-                    // Resolve files that will be built as CLR Files 
+                    // Resolve files that will be built as CLR Files
                     conf.ResolvedSourceFilesWithCompileAsCLROption.AddRange(resolvedSourceFilesWithCompileAsCLROption);
                     var configSourceFilesCompileAsCLRRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsCLRRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsCLROption, configSourceFilesCompileAsCLRRegex);
@@ -1127,12 +1132,12 @@ namespace Sharpmake
                     var configSourceFilesCompileAsNonCLRRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsNonCLRRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsNonCLROption, configSourceFilesCompileAsNonCLRRegex);
 
-                    // Resolve files that will be built as WinRT Files 
+                    // Resolve files that will be built as WinRT Files
                     conf.ResolvedSourceFilesWithCompileAsWinRTOption.AddRange(resolvedSourceFilesWithCompileAsWinRTOption);
                     var configSourceFilesCompileAsWinRTRegex = RegexCache.GetCachedRegexes(conf.SourceFilesCompileAsWinRTRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithCompileAsWinRTOption, configSourceFilesCompileAsWinRTRegex);
 
-                    // Resolve files that will not be built as WinRT Files 
+                    // Resolve files that will not be built as WinRT Files
                     conf.ResolvedSourceFilesWithExcludeAsWinRTOption.AddRange(resolvedSourceFilesWithExcludeAsWinRTOption);
                     var configSourceFilesExcludeAsWinRTRegex = RegexCache.GetCachedRegexes(conf.SourceFilesExcludeAsWinRTRegex);
                     AddMatchFiles(RootPath, resolvedSourceFilesRelative, ResolvedSourceFiles, conf.ResolvedSourceFilesWithExcludeAsWinRTOption, configSourceFilesExcludeAsWinRTRegex);
@@ -1219,7 +1224,7 @@ namespace Sharpmake
 
             if (oneBlobbed || fastBuildBlobs)
             {
-                // Generator will use ResolvedSourceFiles and Configuration.ResolvedSourceFilesExclude, 
+                // Generator will use ResolvedSourceFiles and Configuration.ResolvedSourceFilesExclude,
                 // allow us to handle the blob here instead than in each generator
 
                 // Don't blob precomp source file
@@ -1447,7 +1452,7 @@ namespace Sharpmake
             bool writeBlobsOnDisk
         )
         {
-            // Blob per directory, this make blob file more stable so it's change less 
+            // Blob per directory, this make blob file more stable so it's change less
             // when adding new sources files -> will save compile time :)
             List<SourceFile> currentBlobSourceFiles = new List<SourceFile>();
             var allBlobsFiles = new List<List<SourceFile>>();
@@ -1900,7 +1905,7 @@ namespace Sharpmake
                 using (builder.CreateProfilingScope("PostResolve"))
                     PostResolve();
 
-                if (builder.DumpDependencyGraph && !IsFastBuildAll)
+                if (builder.DumpDependencyGraph && !IsFastBuildAll && !IsNinjaBuildAll)
                 {
                     foreach (Configuration conf in Configurations)
                         DependencyTracker.Instance.UpdateConfiguration(this, conf);
@@ -2022,6 +2027,19 @@ namespace Sharpmake
             ResourceFilesExtensions.Clear();
             PRIFilesExtensions.Clear();
         }
+    }
+
+    [Sharpmake.Generate]
+    internal class NinjaBuildAllProject : Project
+    {
+        public NinjaBuildAllProject(Type targetType)
+            : base(targetType, typeof(Project.Configuration), true)
+            {
+                // Disable automatic source files discovery
+                SourceFilesExtensions.Clear();
+                ResourceFilesExtensions.Clear();
+                PRIFilesExtensions.Clear();
+            }
     }
 
     public class WebReferenceUrl
