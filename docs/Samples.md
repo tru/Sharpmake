@@ -88,7 +88,7 @@ samples/
        "Name": "NetCore-MySample",
        "CIs": [ "github", "gitlab" ],
        "OSs": [ "windows-2022" ],
-       "Frameworks": [ "net8.0" ],
+       "Frameworks": [ "net10.0" ],
        "Configurations": [ "debug", "release" ],
        "TestFolder": "samples/NetCore/MySample",
        "Commands":

@@ -22,6 +22,8 @@ using Microsoft.CodeAnalysis.Text;
 using BasicReferenceAssemblies = Basic.Reference.Assemblies.Net60;
 #elif NET8_0
 using BasicReferenceAssemblies = Basic.Reference.Assemblies.Net80;
+#elif NET10_0
+using BasicReferenceAssemblies = Basic.Reference.Assemblies.Net100;
 #else
 #error unhandled framework version
 #endif
@@ -37,6 +39,9 @@ namespace Sharpmake
 #elif NET8_0
         public const Options.CSharp.LanguageVersion SharpmakeScriptsCSharpVersion = Options.CSharp.LanguageVersion.CSharp12;
         public const DotNetFramework SharpmakeDotNetFramework = DotNetFramework.net8_0;
+#elif NET10_0
+        public const Options.CSharp.LanguageVersion SharpmakeScriptsCSharpVersion = Options.CSharp.LanguageVersion.CSharp12;
+        public const DotNetFramework SharpmakeDotNetFramework = DotNetFramework.net10_0;
 #else
 #error unhandled framework version
 #endif

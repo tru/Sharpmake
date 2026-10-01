@@ -5,7 +5,7 @@
             "Name": "CompileCommandDatabase",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug" ],
             "TestFolder": "samples/CompileCommandDatabase",
             "Commands":
@@ -19,7 +19,7 @@
             "Name": "ConfigureOrder",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "release" ],
             "TestFolder": "samples/ConfigureOrder",
             "Commands":
@@ -35,7 +35,7 @@
             "Name": "CPPCLI-vs2019",
             "CIs": [ "gitlab" ],
             "OSs": [ "windows-2019" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CPPCLI",
             "Commands":
@@ -49,7 +49,7 @@
             "Name": "CPPCLI-vs2022",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CPPCLI",
             "Commands":
@@ -63,7 +63,7 @@
             "Name": "CPPForcePackageReference",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CPPForcePackageReference",
             "Commands":
@@ -77,7 +77,7 @@
             "Name": "CSharpHelloWorld_old_Frameworks",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CSharpHelloWorld",
             "Commands":
@@ -91,7 +91,7 @@
             "Name": "CSharpHelloWorld",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CSharpHelloWorld",
             "Commands":
@@ -105,7 +105,7 @@
             "Name": "CSharpImports",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CSharpImports",
             "Commands":
@@ -119,7 +119,7 @@
             "Name": "CSharpVsix",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CSharpVsix",
             "Commands":
@@ -132,7 +132,7 @@
             "Name": "CustomAnalyzer",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "release" ],
             "TestFolder": "samples/CustomAnalyzer",
             "Commands":
@@ -145,7 +145,7 @@
             "Name": "CustomBuildStep",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release", "FastBuild Debug" ],
             "TestFolder": "samples/CustomBuildStep",
             "Commands":
@@ -159,7 +159,7 @@
             "Name": "CSharpWCF",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/CSharpWCF",
             "Commands":
@@ -172,7 +172,7 @@
             "Name": "FastBuildSimpleExecutable",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/FastBuildSimpleExecutable",
             "Commands":
@@ -186,7 +186,7 @@
             "Name": "FastBuildDuplicateFile",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/FastBuildDuplicateFile",
             "Commands":
@@ -200,7 +200,7 @@
             "Name": "HelloAndroid",
             "CIs": [],
             "OSs": [ "windows-2019" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloAndroid",
             "Commands":
@@ -214,7 +214,7 @@
             "Name": "HelloClangCl",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloClangCl",
             "Commands":
@@ -234,7 +234,7 @@
             "Name": "HelloEvents",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloEvents",
             "Commands":
@@ -250,7 +250,7 @@
             "Name": "HelloWorld",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloWorld",
             "Commands":
@@ -266,7 +266,7 @@
             "Name": "JumboBuild",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/JumboBuild",
             "Commands":
@@ -280,7 +280,7 @@
             "Name": "NetCore-DotNetCoreFrameworkHelloWorld",
             "CIs": [ "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/DotNetCoreFrameworkHelloWorld",
             "Commands":
@@ -299,7 +299,7 @@
             "Name": "NetCore-DotNetFrameworkHelloWorld",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/DotNetFrameworkHelloWorld",
             "Commands":
@@ -316,7 +316,7 @@
             "Name": "NetCore-DotNetFrameworkHelloWorld_OldFrameworks",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/DotNetFrameworkHelloWorld",
             "Commands":
@@ -330,7 +330,7 @@
             "Name": "NetCore-DotNetMultiFrameworksHelloWorld",
             "CIs": [ "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/DotNetMultiFrameworksHelloWorld",
             "Commands":
@@ -345,7 +345,7 @@
             "Name": "NetCore-DotNetOSMultiFrameworksHelloWorld",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/DotNetOSMultiFrameworksHelloWorld",
             "Commands":
@@ -360,7 +360,7 @@
             "Name": "NetCore-EnableDefaultItemsHelloWorld",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/EnableDefaultItemsHelloWorld",
             "Commands":
@@ -374,7 +374,7 @@
             "Name": "NetCore-EnableDefaultItemsFinegrained",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/NetCore/EnableDefaultItemsFinegrained",
             "Commands":
@@ -388,7 +388,7 @@
             "Name": "PackageReferences",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/PackageReferences",
             "Commands":
@@ -404,7 +404,7 @@
             "Name": "QTFileCustomBuild",
             "CIs": [],
             "OSs": [ "windows-2019" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/QTFileCustomBuild",
             "Commands":
@@ -423,7 +423,7 @@
             "Name": "SimpleExeLibDependency",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug" ],
             "TestFolder": "samples/SimpleExeLibDependency",
             "Commands":
@@ -437,7 +437,7 @@
             "Name": "vcpkg",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2019", "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/vcpkg",
             "Commands":
@@ -454,7 +454,7 @@
             "Name": "HelloLinux",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "linux" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloLinux",
             "Commands":
@@ -467,7 +467,7 @@
             "Name": "HelloXCode",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "macos" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloXCode",
             "Commands":
@@ -485,7 +485,7 @@
             "Name": "XCodeProjects",
             "CIs": [ "gitlab" ],
             "OSs": [ "macos" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/XCodeProjects",
             "Commands":
@@ -558,7 +558,7 @@
             "Name": "HelloIOS",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "macos" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloIOS",
             "Commands":
@@ -573,7 +573,7 @@
             "Name": "HelloAssemblyNasm",
             "CIs": [ "github", "gitlab" ],
             "OSs": [ "windows-2022" ],
-            "Frameworks": [ "net8.0" ],
+            "Frameworks": [ "net10.0" ],
             "Configurations": [ "debug", "release" ],
             "TestFolder": "samples/HelloAssemblyNasm",
             "Commands":

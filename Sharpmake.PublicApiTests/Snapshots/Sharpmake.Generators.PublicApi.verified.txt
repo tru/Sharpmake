@@ -1,6 +1,6 @@
 ﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Sharpmake")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Sharpmake.UnitTests")]
-[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v8.0", FrameworkDisplayName=".NET 8.0")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v10.0", FrameworkDisplayName=".NET 10.0")]
 namespace Sharpmake.Generators.Apple
 {
     public class XCWorkspace : Sharpmake.ISolutionGenerator

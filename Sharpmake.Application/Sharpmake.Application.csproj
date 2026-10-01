@@ -8,6 +8,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <RollForward>Major</RollForward>
+    <!-- CET shadow stacks are enabled by default for .NET 9+ apphosts and cost ~15-20% generation time. -->
+    <!-- Sharpmake runs arbitrary user scripts anyway, so the ROP mitigation brings little here. -->
+    <CETCompat>false</CETCompat>
   </PropertyGroup>
 
   <ItemGroup>
